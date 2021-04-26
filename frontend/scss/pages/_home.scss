@@ -78,6 +78,7 @@
   figure {
     margin: 0;
     img {
+      width: 100%;
       max-width: 500px;
       max-height: 500px;
     }
@@ -186,3 +187,10 @@
 }
 
 /** end Services section **/
+.copyrigth-section {
+  margin-top: 20px;
+}
+
+.copyrigth {
+  color: white !important;
+}

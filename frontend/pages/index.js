@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { listTopics } from '../redux/actions/topicsActions'
 import { Grid } from '@material-ui/core'
 import Layout from '../components/layout/Layout'
+import Footer from '../components/footer/Footer'
 import { Service } from '../components/home/Service'
 
 const services = [
@@ -76,7 +77,7 @@ export default function Home() {
   )
 
   const HowItWorks = () => (
-    <div id='' class='howKorks'>
+    <div class='howKorks'>
       <Container>
         <Grid container>
           <Grid item md={12}>
@@ -86,7 +87,7 @@ export default function Home() {
           </Grid>
         </Grid>
         <Grid container>
-          <Grid item md={12}>
+          <Grid item md={12} sm={12} xs={12}>
             <div className='web_howKorks'>
               <figure>
                 <img
@@ -133,7 +134,7 @@ export default function Home() {
               <Service service={service} />
             ))}
           </Grid>
-          <a class='read_more' href='#'>
+          <a className='read_more' href='#'>
             Crear cuenta
           </a>
         </Container>
@@ -146,6 +147,7 @@ export default function Home() {
       <Banner />
       <HowItWorks />
       <Services />
+      <Footer title='TeachMe' description='Asesorias pares estudiantes' />
     </Layout>
   )
 }
