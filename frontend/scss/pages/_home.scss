@@ -1,0 +1,108 @@
+// Banner
+.banner_main {
+  background: #3f51b5;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 90px;
+}
+
+.text-bg {
+  h1 {
+    color: #fff;
+    font-size: 60px;
+    line-height: 80px;
+    padding-bottom: 25px;
+    font-weight: bold;
+  }
+  span {
+    color: #fdd430;
+    font-size: 40px;
+    line-height: 35px;
+    font-weight: bold;
+  }
+  p {
+    color: #fff;
+    font-size: 17px;
+    line-height: 28px;
+    padding: 40px 0;
+  }
+  a {
+    font-size: 16px;
+    background-color: #fff;
+    color: #000;
+    padding: 10px 0px;
+    width: 100%;
+    max-width: 190px;
+    text-align: center;
+    display: inline-block;
+    text-transform: uppercase;
+    &:hover {
+      background-color: #000;
+      color: #fff;
+    }
+  }
+}
+
+.text-img {
+  figure {
+    margin: 0px;
+    img {
+      width: 100%;
+    }
+  }
+}
+
+.titlepage {
+  text-align: center;
+  padding-bottom: 60px;
+  h2 {
+    font-size: 45px;
+    color: #0c0f38;
+    line-height: 40px;
+    font-weight: bold;
+    padding: 0;
+  }
+}
+
+/** How it works section **/
+
+.howKorks {
+  padding-top: 90px;
+}
+
+.web_howKorks {
+  text-align: center;
+  figure {
+    margin: 0;
+    img {
+      max-width: 500px;
+      max-height: 500px;
+    }
+  }
+  p {
+    color: #0c0f38;
+    font-size: 17px;
+    line-height: 28px;
+    padding: 40px 50px;
+  }
+  a {
+    font-size: 16px;
+    background-color: #000;
+    color: #fff;
+    padding: 10px 0px;
+    width: 100%;
+    max-width: 190px;
+    text-align: center;
+    display: inline-block;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin-top: 10px;
+
+    &:hover {
+      background-color: #0c0f38;
+      color: #fff;
+    }
+  }
+}
+
+/** end How it works section **/
