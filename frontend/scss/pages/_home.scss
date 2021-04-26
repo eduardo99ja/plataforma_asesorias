@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css?family=Rajdhani:300,400,500,600,700');
+@import url('https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
+
+// Banner
+.banner_main {
+  background: #3f51b5;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 90px;
+}
+
+.text-bg {
+  h1 {
+    color: #fff;
+    font-size: 60px;
+    line-height: 80px;
+    padding-bottom: 25px;
+    font-weight: bold;
+  }
+  span {
+    color: #fdd430;
+    font-size: 40px;
+    line-height: 35px;
+    font-weight: bold;
+  }
+  p {
+    color: #fff;
+    font-size: 17px;
+    line-height: 28px;
+    padding: 40px 0;
+  }
+  a {
+    font-size: 16px;
+    background-color: #fff;
+    color: #000;
+    padding: 10px 0px;
+    width: 100%;
+    max-width: 190px;
+    text-align: center;
+    display: inline-block;
+    text-transform: uppercase;
+    &:hover {
+      background-color: #000;
+      color: #fff;
+    }
+  }
+}
+
+.text-img {
+  figure {
+    margin: 0px;
+    img {
+      width: 100%;
+    }
+  }
+}
+
+.titlepage {
+  text-align: center;
+  padding-bottom: 60px;
+  h2 {
+    font-size: 45px;
+    color: #0c0f38;
+    line-height: 40px;
+    font-weight: bold;
+    padding: 0;
+  }
+}
+
+/** How it works section **/
+
+.howKorks {
+  padding-top: 90px;
+}
+
+.web_howKorks {
+  text-align: center;
+  figure {
+    margin: 0;
+    img {
+      width: 100%;
+      max-width: 500px;
+      max-height: 500px;
+    }
+  }
+  p {
+    color: #0c0f38;
+    font-size: 17px;
+    line-height: 28px;
+    padding: 40px 50px;
+  }
+  a {
+    font-size: 16px;
+    background-color: #000;
+    color: #fff;
+    padding: 10px 0px;
+    width: 100%;
+    max-width: 190px;
+    text-align: center;
+    display: inline-block;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin-top: 10px;
+
+    &:hover {
+      background-color: #0c0f38;
+      color: #fff;
+    }
+  }
+}
+
+/** end How it works section **/
+/** Services section **/
+
+.Services {
+  margin-top: 90px;
+  padding: 60px 0;
+  background: #3f51b5;
+  font-family: Poppins;
+  .titlepage {
+    text-align: center;
+    h2 {
+      color: #fff;
+      padding-bottom: 20px;
+    }
+    p {
+      color: #fff;
+      font-size: 1.6rem;
+    }
+  }
+  .Services-box {
+    text-align: center;
+    background-color: transparent;
+    border-radius: 20px;
+    border: #cecfd7 solid 2px;
+    padding: 40px;
+    transition: ease-in all 0.5s;
+    margin-bottom: 30px;
+    img {
+      background: #fff;
+      width: 100px;
+      height: 100px;
+      border-radius: 50px;
+      display: inline-block;
+      padding-top: 19px;
+      &:hover {
+        background: #ddd;
+      }
+    }
+    h3 {
+      padding: 20px 0px 20px 0px;
+      font-size: 20px;
+      line-height: 25px;
+      color: #fff;
+      display: block;
+      font-weight: 500;
+    }
+    &:hover {
+      background: #8308eb;
+      transition: ease-in all 0.5s;
+      cursor: pointer;
+    }
+    p {
+      font-size: 16px;
+      line-height: 24px;
+      color: #fff;
+    }
+  }
+}
+
+.read_more {
+  font-size: 16px;
+  background-color: #fff;
+  color: #000;
+  padding: 10px 0px;
+  width: 100%;
+  max-width: 190px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 20px;
+  &:hover {
+    background: #8308eb;
+    color: #fff;
+  }
+}
+
+/** end Services section **/
+.copyrigth-section {
+  margin-top: 20px;
+}
+
+.copyrigth {
+  color: white !important;
+}
