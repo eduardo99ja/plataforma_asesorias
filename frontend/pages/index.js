@@ -4,7 +4,34 @@ import { useDispatch, useSelector } from 'react-redux'
 import { listTopics } from '../redux/actions/topicsActions'
 import { Grid } from '@material-ui/core'
 import Layout from '../components/layout/Layout'
+import { Service } from '../components/home/Service'
 
+const services = [
+  {
+    id: 1,
+    title: 'Clases de regularización',
+    description:
+      '¿Se te dificulta un tema o materia escolar?, no hay problema nuestros asesores te ayudaran con cualquiera de nuestros 500+ temas disponibles',
+    img:
+      'https://res.cloudinary.com/du17vjpcn/image/upload/v1619458662/public_asesorias/classes_hqqpsc.png',
+  },
+  {
+    id: 2,
+    title: 'Asesorias pares',
+    description:
+      'Encuentra al asesor con el que te sientas más comodo, el te explicara el tema que necesitas y resolvera todas tus dudas.',
+    img:
+      'https://res.cloudinary.com/du17vjpcn/image/upload/v1619458662/public_asesorias/pairs_cfmabv.png',
+  },
+  {
+    id: 3,
+    title: 'Preparación para examenes',
+    description:
+      '¿Tienes un examen importante por realizar? , nosotros te ayudamos a estudiar y reforzar todos los temas que lo comprenden.',
+    img:
+      'https://res.cloudinary.com/du17vjpcn/image/upload/v1619458662/public_asesorias/exams_h1xius.png',
+  },
+]
 export default function Home() {
   const dispatch = useDispatch()
   const topicList = useSelector(state => state.topicList)
@@ -60,7 +87,7 @@ export default function Home() {
         </Grid>
         <Grid container>
           <Grid item md={12}>
-            <div class='web_howKorks'>
+            <div className='web_howKorks'>
               <figure>
                 <img
                   src='https://res.cloudinary.com/du17vjpcn/image/upload/v1619402609/public_asesorias/book_a_class_saytjt.png'
@@ -85,10 +112,40 @@ export default function Home() {
     </div>
   )
 
+  const Services = () => {
+    return (
+      <div className='Services'>
+        <Container>
+          <Grid container spacing={3}>
+            <Grid item md={12}>
+              <div className='titlepage'>
+                <h2>Nuestros servicios</h2>
+                <p>
+                  Inscribete a nuestra plataforma para poder disfrutar
+                  <br />
+                  de todos los servicios que te ofrecemos
+                </p>
+              </div>
+            </Grid>
+          </Grid>
+          <Grid container spacing={3}>
+            {services.map(service => (
+              <Service service={service} />
+            ))}
+          </Grid>
+          <a class='read_more' href='#'>
+            Crear cuenta
+          </a>
+        </Container>
+      </div>
+    )
+  }
+
   return (
     <Layout>
       <Banner />
       <HowItWorks />
+      <Services />
     </Layout>
   )
 }
