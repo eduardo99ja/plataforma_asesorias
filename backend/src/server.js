@@ -4,6 +4,7 @@ const morgan = require('morgan')
 const colors = require('colors')
 const connectDB = require('./config/db')
 const cors = require('cors')
+const errorHandler = require('./middleware/error')
 const auth = require('./routes/auth')
 
 class Server {
@@ -24,8 +25,7 @@ class Server {
     // Enable CORS
     this.app.use(cors())
 
-    //Mount routers
-    this.app.use('/api/v1/auth', auth)
+    
 
     // this.app.use(errorHandler)
     if (process.env.NODE_ENV === 'production') {
@@ -47,6 +47,10 @@ class Server {
         res.send('API is running....')
       })
     }
+    //Mount routers
+    this.app.use('/api/v1/auth', auth)
+
+    this.app.use(errorHandler)
   }
 
   execute() {
