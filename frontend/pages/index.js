@@ -81,7 +81,7 @@ export default function Home() {
       <Container>
         <Grid container>
           <Grid item md={12}>
-            <div class='titlepage'>
+            <div className='titlepage'>
               <h2>En que consiste</h2>
             </div>
           </Grid>

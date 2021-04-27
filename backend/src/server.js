@@ -1,3 +1,4 @@
+const path = require('path')
 const express = require('express')
 const morgan = require('morgan')
 const colors = require('colors')
@@ -26,6 +27,25 @@ class Server {
     // this.app.use('/api/v1/travels', travels)
 
     // this.app.use(errorHandler)
+    if (process.env.NODE_ENV === 'production') {
+      path.join(__dirname, '..')
+      this.app.use(
+        express.static(
+          path.join(
+            path.normalize(path.join(__dirname, '..')),
+            '/../frontend/out'
+          )
+        )
+      )
+
+      this.app.get('*', (req, res) =>
+        res.sendFile(path.resolve(__dirname, 'frontend', 'out', 'index.html'))
+      )
+    } else {
+      this.app.get('/', (req, res) => {
+        res.send('API is running....')
+      })
+    }
   }
 
   execute() {
