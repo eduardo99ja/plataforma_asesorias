@@ -6,6 +6,7 @@ import { Grid } from '@material-ui/core'
 import Layout from '../components/layout/Layout'
 import Footer from '../components/footer/Footer'
 import { Service } from '../components/home/Service'
+import Link from 'next/link'
 
 const services = [
   {
@@ -58,7 +59,9 @@ export default function Home() {
                 materias, elige a tu asesor dependiendo de tus necesidades y
                 genera tu asesoria de una manera facil y rapida.
               </p>
-              <a href='#'>Empezar a buscar</a>
+              <Link href='catalogo'>
+                <a>Empezar a buscar</a>
+              </Link>
             </div>
           </Grid>
           <Grid item md={7} lg={7}>
@@ -105,7 +108,9 @@ export default function Home() {
                 deleniti molestiae error debitis officiis? Voluptate ratione
                 numquam a saepe molestias rem fuga!
               </p>
-              <a href='#'>Empieza a buscar</a>
+              <Link href='catalogo'>
+                <a href='#'>Empieza a buscar</a>
+              </Link>
             </div>
           </Grid>
         </Grid>

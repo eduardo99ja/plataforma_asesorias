@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { fade, makeStyles } from '@material-ui/core/styles'
+import { fade, makeStyles, withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
@@ -14,8 +14,14 @@ import AccountCircle from '@material-ui/icons/AccountCircle'
 import MailIcon from '@material-ui/icons/Mail'
 import NotificationsIcon from '@material-ui/icons/Notifications'
 import MoreIcon from '@material-ui/icons/MoreVert'
+import Button from '@material-ui/core/Button'
+import Link from 'next/link'
+import { green, purple } from '@material-ui/core/colors'
 
 const useStyles = makeStyles(theme => ({
+  margin: {
+    marginRight: theme.spacing(1),
+  },
   grow: {
     flexGrow: 1,
   },
@@ -174,7 +180,7 @@ export default function PrimarySearchAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant='h6' noWrap>
-            Material-UI
+            TeachMe
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -191,6 +197,13 @@ export default function PrimarySearchAppBar() {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
+            <Link href='catalogo'>
+              <a className='link-header'>Explorar temas</a>
+            </Link>
+            <Link href='catalogo'>
+              <a className='link-header'>Nosotros</a>
+            </Link>
+
             <IconButton aria-label='show 4 new mails' color='inherit'>
               <Badge badgeContent={4} color='secondary'>
                 <MailIcon />
