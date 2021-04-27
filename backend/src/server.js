@@ -39,14 +39,15 @@ class Server {
         )
       )
 
-      this.app.get('*', (req, res) =>
-        res.sendFile(path.resolve(__dirname, 'frontend', 'out', 'index.html'))
-      )
-    } else {
-      this.app.get('/', (req, res) => {
-        res.send('API is running....')
-      })
-    }
+      // this.app.get('*', (req, res) =>
+      //   res.sendFile(path.resolve(__dirname, 'frontend', 'out', 'index.html'))
+      // )
+    } 
+    // else {
+    //   this.app.get('/', (req, res) => {
+    //     res.send('API is running....')
+    //   })
+    // }
     //Mount routers
     this.app.use('/api/v1/auth', auth)
 
