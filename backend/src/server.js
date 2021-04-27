@@ -4,6 +4,7 @@ const morgan = require('morgan')
 const colors = require('colors')
 const connectDB = require('./config/db')
 const cors = require('cors')
+const auth = require('./routes/auth')
 
 class Server {
   constructor() {
@@ -24,7 +25,7 @@ class Server {
     this.app.use(cors())
 
     //Mount routers
-    // this.app.use('/api/v1/travels', travels)
+    this.app.use('/api/v1/auth', auth)
 
     // this.app.use(errorHandler)
     if (process.env.NODE_ENV === 'production') {

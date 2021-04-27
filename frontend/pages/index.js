@@ -77,7 +77,7 @@ export default function Home() {
   )
 
   const HowItWorks = () => (
-    <div class='howKorks'>
+    <div className='howKorks'>
       <Container>
         <Grid container>
           <Grid item md={12}>
@@ -131,7 +131,7 @@ export default function Home() {
           </Grid>
           <Grid container spacing={3}>
             {services.map(service => (
-              <Service service={service} />
+              <Service key={service.id} service={service} />
             ))}
           </Grid>
           <a className='read_more' href='#'>
