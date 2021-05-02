@@ -197,10 +197,10 @@ export default function PrimarySearchAppBar() {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <Link href='catalogo'>
+            <Link href='/catalogo'>
               <a className='link-header'>Explorar temas</a>
             </Link>
-            <Link href='catalogo'>
+            <Link href='/catalogo'>
               <a className='link-header'>Nosotros</a>
             </Link>
 

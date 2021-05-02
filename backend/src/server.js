@@ -5,13 +5,15 @@ const colors = require('colors')
 const connectDB = require('./config/db')
 const cors = require('cors')
 const errorHandler = require('./middleware/error')
-const auth = require('./routes/auth')
+const subjects = require('./routes/subjects')
+    const auth = require('./routes/auth')
 
 class Server {
   constructor() {
     this.app = express()
 
     connectDB()
+    
   }
 
   middlewares() {
@@ -24,8 +26,6 @@ class Server {
 
     // Enable CORS
     this.app.use(cors())
-
-    
 
     // this.app.use(errorHandler)
     if (process.env.NODE_ENV === 'production') {
@@ -42,13 +42,15 @@ class Server {
       // this.app.get('*', (req, res) =>
       //   res.sendFile(path.resolve(__dirname, 'frontend', 'out', 'index.html'))
       // )
-    } 
+    }
     // else {
     //   this.app.get('/', (req, res) => {
     //     res.send('API is running....')
     //   })
     // }
     //Mount routers
+
+    this.app.use('/api/v1/subjects', subjects)
     this.app.use('/api/v1/auth', auth)
 
     this.app.use(errorHandler)
