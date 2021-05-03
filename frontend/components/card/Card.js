@@ -7,7 +7,8 @@ import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-
+import Link from 'next/link'
+const id = 'asd123456'
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
@@ -44,9 +45,11 @@ const CardTopic = () => {
         <Button size='small' color='primary'>
           Guardar
         </Button>
-        <Button size='small' color='primary'>
-          Ver más
-        </Button>
+        <Link href='/temas/[id]' as={`/temas/${id}`}>
+          <Button size='small' color='primary'>
+            Ver más
+          </Button>
+        </Link>
       </CardActions>
     </Card>
   )

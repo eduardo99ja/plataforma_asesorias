@@ -19,7 +19,7 @@ const Layout = props => {
           rel='stylesheet'
         />
       </Head>
-      <CssBaseline />
+      
       <Container>
         <Header />
         {props.children}
