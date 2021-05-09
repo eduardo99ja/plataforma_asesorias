@@ -2,18 +2,18 @@ const path = require('path')
 const express = require('express')
 const morgan = require('morgan')
 const colors = require('colors')
-const connectDB = require('./config/db')
 const cors = require('cors')
+const connectDB = require('./config/db')
 const errorHandler = require('./middleware/error')
 const subjects = require('./routes/subjects')
-    const auth = require('./routes/auth')
+const auth = require('./routes/auth')
+const tutors = require('./routes/tutors')
 
 class Server {
   constructor() {
     this.app = express()
 
     connectDB()
-    
   }
 
   middlewares() {
@@ -52,6 +52,7 @@ class Server {
 
     this.app.use('/api/v1/subjects', subjects)
     this.app.use('/api/v1/auth', auth)
+    this.app.use('/api/v1/tutors', tutors)
 
     this.app.use(errorHandler)
   }
