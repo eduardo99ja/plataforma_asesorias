@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const TutorSchema = new mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
+  _id: mongoose.Schema.ObjectId,
   birthday: {
     type: Date,
     required: [true, 'Debe agregar su fecha de nacimiento'],
@@ -24,8 +24,20 @@ const TutorSchema = new mongoose.Schema({
   school: {
     type: String,
   },
+  averageRating: {
+    type: Number,
+    min: [1, 'La calificación minima es de 1'],
+    max: [5, 'La calificacion no puede ser mas de 5'],
+  },
+  hourPrice: {
+    type: Number,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
   user: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.ObjectId,
     required: true,
     ref: 'User',
   },
