@@ -92,6 +92,7 @@ exports.updateDetails = asyncHandler(async (req, res, next) => {
   const fieldsToUpdate = {
     name: req.body.name,
     email: req.body.email,
+    lastName: req.body.lastName,
   }
 
   const user = await User.findByIdAndUpdate(req.user.id, fieldsToUpdate, {
@@ -186,4 +187,16 @@ exports.resetPassword = asyncHandler(async (req, res, next) => {
   await user.save()
 
   sendTokenResponse(user, 200, res)
+})
+
+//? @desc      Get current logged in user
+//? @route     POST /api/v1/auth/me
+//? @access    Private
+exports.getMe = asyncHandler(async (req, res, next) => {
+  const user = await User.findById(req.user.id)
+
+  res.status(200).json({
+    success: true,
+    data: user,
+  })
 })

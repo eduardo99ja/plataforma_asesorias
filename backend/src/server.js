@@ -8,6 +8,7 @@ const errorHandler = require('./middleware/error')
 const subjects = require('./routes/subjects')
 const auth = require('./routes/auth')
 const tutors = require('./routes/tutors')
+const pupils = require('./routes/pupils')
 
 class Server {
   constructor() {
@@ -53,6 +54,7 @@ class Server {
     this.app.use('/api/v1/subjects', subjects)
     this.app.use('/api/v1/auth', auth)
     this.app.use('/api/v1/tutors', tutors)
+    this.app.use('/api/v1/pupils', pupils)
 
     this.app.use(errorHandler)
   }
