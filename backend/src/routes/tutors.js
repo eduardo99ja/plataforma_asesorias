@@ -1,7 +1,13 @@
 const express = require('express')
-const { createTutor, getTutors } = require('../controllers/tutors')
+const {
+  createTutor,
+  getTutors,
+  getMe,
+  updateDetails,
+} = require('../controllers/tutors')
 const Tutor = require('../models/Tutor')
 const advancedResults = require('../middleware/advancedResults')
+const { protect } = require('../middleware/auth')
 
 const router = express.Router()
 
@@ -12,5 +18,7 @@ router
     getTutors
   )
   .post(createTutor)
+router.get('/me', protect, getMe)
+router.put('/updatedetails', protect, updateDetails)
 
 module.exports = router
