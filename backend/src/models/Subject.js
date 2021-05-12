@@ -14,12 +14,9 @@ const SubjectSchema = new mongoose.Schema(
     description: {
       type: String,
       required: [true, 'Debe agregar una descripcion'],
-
       maxlength: [500, 'La descripcion no puede ser mayor a 50 caracteres'],
     },
-
     level: {
-      // Array of strings
       type: String,
       required: true,
       //enum means only the elements of the array can be selected

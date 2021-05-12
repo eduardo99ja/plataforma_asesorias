@@ -5,10 +5,10 @@ const colors = require('colors')
 const cors = require('cors')
 const connectDB = require('./config/db')
 const errorHandler = require('./middleware/error')
-const subjects = require('./routes/subjects')
 const auth = require('./routes/auth')
 const tutors = require('./routes/tutors')
 const pupils = require('./routes/pupils')
+const subjects = require('./routes/subjects')
 
 class Server {
   constructor() {
