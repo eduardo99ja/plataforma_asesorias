@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
+const slugify = require('slugify')
 
-const TopicSchema = new mongoose.Schema({
+const ThemeSchema = new mongoose.Schema({
   title: {
     type: String,
     trim: true,
@@ -14,6 +15,9 @@ const TopicSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  subthemes: {
+    type: [String],
+  },
   subject: {
     type: mongoose.Schema.ObjectId,
     ref: 'Subject',
@@ -24,9 +28,13 @@ const TopicSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
+  slug: String,
 })
 
+// Create theme slug  from the name
+ThemeSchema.pre('save', function (next) {
+  this.slug = slugify(this.title, { lower: true })
+  next()
+})
 
-
-
-module.exports = mongoose.model('Topic', TopicSchema)
+module.exports = mongoose.model('Theme', ThemeSchema)
