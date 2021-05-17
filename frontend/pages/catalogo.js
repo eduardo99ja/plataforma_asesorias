@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
@@ -15,6 +16,7 @@ import Layout from '../components/layout/Layout'
 import { Container, Grid } from '@material-ui/core'
 
 import CardTopic from '../components/card/Card'
+import { listSubjects } from '../redux/actions/subjectActions'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -32,6 +34,16 @@ const catalogo = () => {
   const [open, setOpen] = React.useState(false)
   const [materia, setMateria] = React.useState('')
   const [nivel, setNivel] = React.useState('')
+
+  const dispatch = useDispatch()
+
+  const subjectList = useSelector(state => state.subjectList)
+  const { loading, error, subjects } = subjectList
+
+  useEffect(() => {
+    dispatch(listSubjects())
+  }, [dispatch])
+  console.log(subjects)
 
   const handleChangeMateria = event => {
     setMateria(event.target.value || '')
@@ -116,10 +128,10 @@ const catalogo = () => {
             <h2>Matematicas</h2>
           </Grid>
           <Grid item container lg={12}>
-            {[0, 1, 2, 3, 4, 5, 6, 7].map(item => {
+            {subjects.map(subject => {
               return (
-                <Grid item lg={3} md={4} sm={6} xm={12}>
-                  <CardTopic />
+                <Grid key={subject._id} item lg={3} md={4} sm={6} xm={12}>
+                  <CardTopic  subject={subject} />
                 </Grid>
               )
             })}
