@@ -1,10 +1,10 @@
 import clienteAxios from '../../axios/client'
 import * as types from '../types/subjectTypes'
 
-export const listSubjects = () => async dispatch => {
+export const listSubjects = (level) => async dispatch => {
   try {
     dispatch({ type: types.SUBJECT_LIST_REQUEST })
-    const { data } = await clienteAxios.get('/api/v1/subjects')
+    const { data } = await clienteAxios.get(`api/v1/subjects?level=${level}`)
     console.log(data)
     dispatch({
       type: types.SUBJECT_LIST_SUCCESS,

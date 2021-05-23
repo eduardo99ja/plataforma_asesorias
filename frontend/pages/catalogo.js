@@ -32,8 +32,8 @@ const useStyles = makeStyles(theme => ({
 const catalogo = () => {
   const classes = useStyles()
   const [open, setOpen] = React.useState(false)
-  const [materia, setMateria] = React.useState('')
-  const [nivel, setNivel] = React.useState('')
+  const [materia, setMateria] = React.useState('all')
+  const [nivel, setNivel] = React.useState('Bachillerato')
 
   const dispatch = useDispatch()
 
@@ -41,12 +41,13 @@ const catalogo = () => {
   const { loading, error, subjects } = subjectList
 
   useEffect(() => {
-    dispatch(listSubjects())
-  }, [dispatch])
+    dispatch(listSubjects(nivel))
+  }, [dispatch,nivel])
   console.log(subjects)
 
   const handleChangeMateria = event => {
     setMateria(event.target.value || '')
+    console.log(materia)
   }
   const handleChangeNivel = event => {
     setNivel(event.target.value || '')
@@ -58,6 +59,7 @@ const catalogo = () => {
 
   const handleClose = () => {
     setOpen(false)
+    console.log("on ok",materia);
   }
   const SelectDialog = () => {
     return (
@@ -81,9 +83,9 @@ const catalogo = () => {
                   input={<Input id='demo-dialog-native' />}
                 >
                   <option aria-label='None' value='' />
-                  <option value='sec'>Secundaria</option>
-                  <option value='bach'>Bachillerato</option>
-                  <option value='lic'>Licenciatura</option>
+                  <option value='Secundaria'>Secundaria</option>
+                  <option value='Bachillerato'>Bachillerato</option>
+                  <option value='Licenciatura'>Licenciatura</option>
                 </Select>
               </FormControl>
               <FormControl className={classes.formControl}>
@@ -95,12 +97,16 @@ const catalogo = () => {
                   onChange={handleChangeMateria}
                   input={<Input />}
                 >
-                  <MenuItem value=''>
-                    <em>Ninguno</em>
+                  <MenuItem value='all'>
+                    Todas
                   </MenuItem>
-                  <MenuItem value='math'>Matematicas</MenuItem>
-                  <MenuItem value='quim'>Quimica</MenuItem>
-                  <MenuItem value='eng'>Ingles</MenuItem>
+                  {subjects.map(subject => {
+                    return (
+                      <MenuItem key={subject._id} value={subject._id}>
+                        {subject.name}
+                      </MenuItem>
+                    )
+                  })}
                 </Select>
               </FormControl>
             </form>
@@ -131,7 +137,7 @@ const catalogo = () => {
             {subjects.map(subject => {
               return (
                 <Grid key={subject._id} item lg={3} md={4} sm={6} xm={12}>
-                  <CardTopic  subject={subject} />
+                  <CardTopic subject={subject} />
                 </Grid>
               )
             })}
