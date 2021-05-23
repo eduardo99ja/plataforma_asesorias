@@ -17,6 +17,7 @@ import { Container, Grid } from '@material-ui/core'
 
 import CardTopic from '../components/card/Card'
 import { listSubjects } from '../redux/actions/subjectActions'
+import { listThemes } from '../redux/actions/themeActions'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -39,15 +40,22 @@ const catalogo = () => {
 
   const subjectList = useSelector(state => state.subjectList)
   const { loading, error, subjects } = subjectList
+  const themeList = useSelector(state => state.themeList)
+  const { themes } = themeList
 
+  //Get Subjects for select
   useEffect(() => {
     dispatch(listSubjects(nivel))
-  }, [dispatch,nivel])
+  }, [dispatch, nivel])
   console.log(subjects)
+
+  //Get themes
+  useEffect(() => {
+    dispatch(listThemes(materia))
+  }, [dispatch, materia])
 
   const handleChangeMateria = event => {
     setMateria(event.target.value || '')
-    console.log(materia)
   }
   const handleChangeNivel = event => {
     setNivel(event.target.value || '')
@@ -59,7 +67,6 @@ const catalogo = () => {
 
   const handleClose = () => {
     setOpen(false)
-    console.log("on ok",materia);
   }
   const SelectDialog = () => {
     return (
@@ -97,9 +104,7 @@ const catalogo = () => {
                   onChange={handleChangeMateria}
                   input={<Input />}
                 >
-                  <MenuItem value='all'>
-                    Todas
-                  </MenuItem>
+                  <MenuItem value='all'>Todas</MenuItem>
                   {subjects.map(subject => {
                     return (
                       <MenuItem key={subject._id} value={subject._id}>
@@ -131,13 +136,13 @@ const catalogo = () => {
         </Grid>
         <Grid container>
           <Grid item container>
-            <h2>Matematicas</h2>
+           
           </Grid>
           <Grid item container lg={12}>
-            {subjects.map(subject => {
+            {themes.map(theme => {
               return (
-                <Grid key={subject._id} item lg={3} md={4} sm={6} xm={12}>
-                  <CardTopic subject={subject} />
+                <Grid key={theme._id} item lg={3} md={4} sm={6} xm={12}>
+                  <CardTopic theme={theme} />
                 </Grid>
               )
             })}

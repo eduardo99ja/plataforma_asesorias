@@ -101,16 +101,16 @@ const Tema = () => {
         <h3>Asesores disponibles para este tema</h3>
         <Grid container spacing={3}>
           <Grid item lg={3}>
-            <CardTopic />
+            {/* <CardTopic /> */}
           </Grid>
           <Grid item lg={3}>
-            <CardTopic />
+            {/* <CardTopic /> */}
           </Grid>
           <Grid item lg={3}>
-            <CardTopic />
+            {/* <CardTopic /> */}
           </Grid>
           <Grid item lg={3}>
-            <CardTopic />
+            {/* <CardTopic /> */}
           </Grid>
         </Grid>
         <Grid container justify='center'>

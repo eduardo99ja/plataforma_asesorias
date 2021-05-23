@@ -19,7 +19,7 @@ const useStyles = makeStyles({
   },
 })
 
-const CardTopic = () => {
+const CardTopic = ({theme}) => {
   const classes = useStyles()
 
   return (
@@ -32,12 +32,10 @@ const CardTopic = () => {
         />
         <CardContent>
           <Typography gutterBottom variant='h5' component='h2'>
-            Tema
+            {theme.title}
           </Typography>
           <Typography variant='body2' color='textSecondary' component='p'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi,
-            laborum at. Assumenda aperiam eum omnis voluptates nihil quos
-            necessitatibus sint!
+            {theme.description}
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -45,7 +43,7 @@ const CardTopic = () => {
         <Button size='small' color='primary'>
           Guardar
         </Button>
-        <Link href='/temas/[id]' as={`/temas/${id}`}>
+        <Link href='/temas/[id]' as={`/temas/${theme._id}`}>
           <Button size='small' color='primary'>
             Ver más
           </Button>
