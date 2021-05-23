@@ -3,7 +3,17 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 import rootReducer from './reducers'
-const initialState = {}
+import { useEffect } from 'react'
+let userInfoFromStorage
+
+if (typeof window !== 'undefined') {
+  userInfoFromStorage = localStorage.getItem('userInfo')
+    ? JSON.parse(localStorage.getItem('userInfo'))
+    : null
+}
+const initialState = {
+  userLogin: { userInfo: userInfoFromStorage },
+}
 const middleware = [thunk]
 
 const store = createStore(
