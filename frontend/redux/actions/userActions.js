@@ -1,10 +1,10 @@
 import * as types from '../types/userTypes'
 import clienteAxios from '../../axios/client'
 
-export const login = (email, password) => async dispatch => {
+export const login = formData => async dispatch => {
   try {
     dispatch({
-      type: USER_LOGIN_REQUEST,
+      type: types.USER_LOGIN_REQUEST,
     })
 
     const config = {
@@ -14,7 +14,7 @@ export const login = (email, password) => async dispatch => {
     }
     const { data } = await clienteAxios.post(
       '/api/v1/auth/login',
-      { email, password },
+      formData,
       config
     )
 
@@ -25,11 +25,13 @@ export const login = (email, password) => async dispatch => {
 
     localStorage.setItem('userInfo', JSON.stringify(data))
   } catch (error) {
+    console.log(error.response);
+    console.log(error.message);
     dispatch({
       type: types.USER_LOGIN_FAIL,
       payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
+        error.response && error.response.data.error
+          ? error.response.data.error
           : error.message,
     })
   }
@@ -72,4 +74,9 @@ export const register = formData => async dispatch => {
           : error.message,
     })
   }
+}
+
+export const logout = () => dispatch => {
+  localStorage.removeItem('userInfo')
+  dispatch({ type: types.USER_LOGOUT })
 }

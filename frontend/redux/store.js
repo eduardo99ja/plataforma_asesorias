@@ -3,7 +3,7 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 import rootReducer from './reducers'
-import { useEffect } from 'react'
+
 let userInfoFromStorage
 
 if (typeof window !== 'undefined') {

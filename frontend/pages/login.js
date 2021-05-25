@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -10,7 +10,15 @@ import Grid from '@material-ui/core/Grid'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
+import LinearProgress from '@material-ui/core/LinearProgress'
 import Container from '@material-ui/core/Container'
+import MuiAlert from '@material-ui/lab/Alert'
+import { useDispatch, useSelector } from 'react-redux'
+import { login } from '../redux/actions/userActions'
+import { useRouter } from 'next/router'
+
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -32,8 +40,26 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const login = () => {
+const loginScreen = () => {
+  const router = useRouter()
   const classes = useStyles()
+  const dispatch = useDispatch()
+
+  const userLogin = useSelector(state => state.userLogin)
+  const { loading, error, userInfo } = userLogin
+  useEffect(() => {
+    if (userInfo) {
+      router.push('/catalogo')
+    }
+  }, [userInfo])
+
+  const formik = useFormik({
+    initialValues: initialValues(),
+    validationSchema: Yup.object(validationSchema()),
+    onSubmit: async formData => {
+      dispatch(login(formData))
+    },
+  })
 
   return (
     <Container component='main' maxWidth='xs'>
@@ -45,7 +71,11 @@ const login = () => {
         <Typography component='h1' variant='h5'>
           Iniciar sesión
         </Typography>
-        <form className={classes.form} noValidate>
+        <form
+          className={classes.form}
+          noValidate
+          onSubmit={formik.handleSubmit}
+        >
           <TextField
             variant='outlined'
             margin='normal'
@@ -56,6 +86,8 @@ const login = () => {
             name='email'
             autoComplete='email'
             autoFocus
+            onChange={formik.handleChange}
+            error={formik.errors.email}
           />
           <TextField
             variant='outlined'
@@ -67,11 +99,15 @@ const login = () => {
             type='password'
             id='password'
             autoComplete='current-password'
+            onChange={formik.handleChange}
+            error={formik.errors.password}
           />
           <FormControlLabel
             control={<Checkbox value='remember' color='primary' />}
             label='Recordar cuenta'
           />
+          {loading && <LinearProgress />}
+          {error && <Alert severity='error'>{error}</Alert>}
           <Button
             type='submit'
             fullWidth
@@ -99,4 +135,21 @@ const login = () => {
   )
 }
 
-export default login
+export default loginScreen
+
+function initialValues() {
+  return {
+    email: '',
+    password: '',
+  }
+}
+
+function validationSchema() {
+  return {
+    email: Yup.string().email(true).required(true),
+    password: Yup.string().required(true),
+  }
+}
+function Alert(props) {
+  return <MuiAlert elevation={6} variant='filled' {...props} />
+}

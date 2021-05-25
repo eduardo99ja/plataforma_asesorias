@@ -16,7 +16,10 @@ import NotificationsIcon from '@material-ui/icons/Notifications'
 import MoreIcon from '@material-ui/icons/MoreVert'
 import Button from '@material-ui/core/Button'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useDispatch, useSelector } from 'react-redux'
 import { green, purple } from '@material-ui/core/colors'
+import { logout } from '../../redux/actions/userActions'
 
 const useStyles = makeStyles(theme => ({
   margin: {
@@ -86,6 +89,10 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function PrimarySearchAppBar() {
+  const router = useRouter()
+  const dispatch = useDispatch()
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = useState(null)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null)
@@ -106,6 +113,13 @@ export default function PrimarySearchAppBar() {
     handleMobileMenuClose()
   }
 
+  const handleLogout = () => {
+
+    setAnchorEl(null)
+    handleMobileMenuClose()
+    dispatch(logout())
+  }
+
   const handleMobileMenuOpen = event => {
     setMobileMoreAnchorEl(event.currentTarget)
   }
@@ -123,6 +137,7 @@ export default function PrimarySearchAppBar() {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleLogout}>Cerrar sesión</MenuItem>
     </Menu>
   )
 
@@ -200,30 +215,46 @@ export default function PrimarySearchAppBar() {
             <Link href='/catalogo'>
               <a className='link-header'>Explorar temas</a>
             </Link>
-            <Link href='/catalogo'>
+            <Link href='/nosotros'>
               <a className='link-header'>Nosotros</a>
             </Link>
 
-            <IconButton aria-label='show 4 new mails' color='inherit'>
-              <Badge badgeContent={4} color='secondary'>
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton aria-label='show 17 new notifications' color='inherit'>
-              <Badge badgeContent={17} color='secondary'>
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              edge='end'
-              aria-label='account of current user'
-              aria-controls={menuId}
-              aria-haspopup='true'
-              onClick={handleProfileMenuOpen}
-              color='inherit'
-            >
-              <AccountCircle />
-            </IconButton>
+            {userInfo ? (
+              <>
+                <IconButton aria-label='show 4 new mails' color='inherit'>
+                  <Badge badgeContent={4} color='secondary'>
+                    <MailIcon />
+                  </Badge>
+                </IconButton>
+                <IconButton
+                  aria-label='show 17 new notifications'
+                  color='inherit'
+                >
+                  <Badge badgeContent={17} color='secondary'>
+                    <NotificationsIcon />
+                  </Badge>
+                </IconButton>
+                <IconButton
+                  edge='end'
+                  aria-label='account of current user'
+                  aria-controls={menuId}
+                  aria-haspopup='true'
+                  onClick={handleProfileMenuOpen}
+                  color='inherit'
+                >
+                  <AccountCircle />
+                </IconButton>
+              </>
+            ) : (
+              <>
+                <Link href='/login'>
+                  <a className='link-header'>Iniciar sesión</a>
+                </Link>
+                <Link href='/nueva-cuenta'>
+                  <a className='link-header'>Registrarse</a>
+                </Link>
+              </>
+            )}
           </div>
           <div className={classes.sectionMobile}>
             <IconButton
