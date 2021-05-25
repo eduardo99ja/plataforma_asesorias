@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../../components/layout/Layout'
 import {
   Container,
@@ -14,10 +14,23 @@ import {
 } from '@material-ui/pickers'
 import DateFnsUtils from '@date-io/date-fns'
 import Link from 'next/link'
-
+import { useDispatch, useSelector } from 'react-redux'
 import CardTopic from '../../components/card/Card'
+import { useRouter } from 'next/router'
+import { listThemeDetails } from '../../redux/actions/themeActions'
 
 const Tema = () => {
+  const dispatch = useDispatch()
+  const router = useRouter()
+
+  const themeDetails = useSelector(state => state.themeDetails)
+  const { loading, error, theme } = themeDetails
+
+  useEffect(() => {
+    router.query.id && dispatch(listThemeDetails(router.query.id))
+  }, [dispatch, router.query.id])
+  
+
   const handleClick = () => {
     console.info('You clicked the Chip.')
   }
@@ -34,7 +47,7 @@ const Tema = () => {
   return (
     <Layout>
       <Container maxWidth='md'>
-        <h2>Tema</h2>
+        <h2>{theme.title}</h2>
         <Grid container spacing={2}>
           <Grid item lg={5}>
             <img
@@ -44,13 +57,13 @@ const Tema = () => {
             />
             <Chip
               avatar={<Avatar>M</Avatar>}
-              label='Preparatoria'
+              label={theme?.subject?.level}
               color='primary'
               onClick={handleClick}
             />
             <Chip
               avatar={<Avatar>M</Avatar>}
-              label='Matematicas'
+              label={theme?.subject?.name}
               color='primary'
               onClick={handleClick}
             />
@@ -58,14 +71,7 @@ const Tema = () => {
           <Grid item lg={7}>
             <h3>Descripción</h3>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, ut.
-              Obcaecati eius ipsam dolores rerum vel consequuntur voluptatum
-              quis nulla suscipit deleniti possimus totam pariatur deserunt,
-              cupiditate eos repellendus asperiores? Minima illum illo earum
-              quibusdam obcaecati nulla, ex explicabo rerum quos possimus
-              voluptatum reiciendis, accusantium eveniet expedita deleniti
-              exercitationem eligendi inventore commodi veritatis. Possimus, sed
-              similique laborum ea officia assumenda.
+              {theme.description}
             </p>
           </Grid>
         </Grid>

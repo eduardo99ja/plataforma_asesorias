@@ -25,7 +25,7 @@ exports.getThemes = asyncHandler(async (req, res, next) => {
 exports.getTheme = asyncHandler(async (req, res, next) => {
   const theme = await Theme.findById(req.params.id).populate({
     path: 'subject',
-    select: 'name description',
+    select: 'name description level',
   })
 
   if (!theme) {

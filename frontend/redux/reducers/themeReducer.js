@@ -15,3 +15,18 @@ export const themeListReducer = (state = { themes: [] }, action) => {
       return state
   }
 }
+
+export const themeDetailsReducer = (state = { theme: {} }, action) => {
+  switch (action.type) {
+    case types.THEME_DETAILS_REQUEST:
+      return { loading: true, ...state }
+    case types.THEME_DETAILS_SUCCESS:
+      return { loading: false, theme: action.payload }
+    case types.THEME_DETAILS_FAIL:
+      return { loading: false, error: action.payload }
+    case types.THEME_DETAILS_RESET:
+      return { theme: {} }
+    default:
+      return state
+  }
+}
