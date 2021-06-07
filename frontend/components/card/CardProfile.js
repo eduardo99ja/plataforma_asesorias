@@ -5,7 +5,7 @@ import Link from 'next/link'
 const CardProfile = ({ tutor }) => {
   return (
     <div class='cardProfile'>
-      <Link href='/asesores/123456'>
+      <Link href='/asesores/[id]' as={`/asesores/${tutor._id}`}>
         <img
           src='https://res.cloudinary.com/du17vjpcn/image/upload/v1621985542/public_asesorias/undraw_profile_pic_ic5t_xhiicp.png'
           alt='John'
@@ -17,7 +17,7 @@ const CardProfile = ({ tutor }) => {
         </h2>
       </Link>
       <p class='title'>{tutor.school}</p>
-      <Rating name='size-large' defaultValue={2} size='large' readOnly />
+      <Rating name='size-small' defaultValue={2} size='small' readOnly />
       <button className='btn-profile'>Seleccionar</button>
       
       
