@@ -4,6 +4,7 @@ import { subjectListReducer } from './subjectReducer'
 import { themeListReducer, themeDetailsReducer } from './themeReducer'
 import { userLoginReducer, userRegisterReducer } from './userReducer'
 import { pupilRegisterReducer } from './pupilReducer'
+import { tutorRegisterReducer } from './tutorReducer'
 
 export default combineReducers({
   topicList: topicListReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
   themeDetails: themeDetailsReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
-  pupilRegister: pupilRegisterReducer
+  pupilRegister: pupilRegisterReducer,
+  tutorRegister: tutorRegisterReducer,
 })

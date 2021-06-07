@@ -78,5 +78,7 @@ export const register = formData => async dispatch => {
 
 export const logout = () => dispatch => {
   localStorage.removeItem('userInfo')
+  localStorage.removeItem('pupilInfo')
+  localStorage.removeItem('tutorInfo')
   dispatch({ type: types.USER_LOGOUT })
 }

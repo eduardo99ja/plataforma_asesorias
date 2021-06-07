@@ -27,25 +27,23 @@ import * as Yup from 'yup'
 import jwt_decode from 'jwt-decode'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { register } from '../../redux/actions/pupilActions'
+import { register } from '../../redux/actions/tutorActions'
 
 const MyCuenta = () => {
   const dispatch = useDispatch()
   const router = useRouter()
-  const pupilRegister = useSelector(state => state.pupilRegister)
-  const { loading, error, pupilInfo } = pupilRegister
-
+  const tutorRegister = useSelector(state => state.tutorRegister)
+  const { loading, error, tutorInfo } = tutorRegister
 
   //Get id user logged
   const userLogin = useSelector(state => state.userLogin)
-  const {  userInfo } = userLogin
-
+  const { userInfo } = userLogin
 
   useEffect(() => {
-    if (pupilInfo) {
+    if (tutorInfo) {
       router.push('/catalogo')
     }
-  }, [pupilInfo])
+  }, [tutorInfo])
   const [selectedDate, setSelectedDate] = React.useState(
     new Date('2014-08-18T21:11:54')
   )
@@ -57,10 +55,8 @@ const MyCuenta = () => {
     initialValues: initialValues(),
     validationSchema: Yup.object(validationSchema()),
     onSubmit: async formData => {
-      let { id } = jwt_decode(
-       userInfo.token
-      )
-      
+      let { id } = jwt_decode(userInfo.token)
+
       formData = {
         ...formData,
         _id: id,
@@ -80,6 +76,21 @@ const MyCuenta = () => {
             onSubmit={formik.handleSubmit}
           >
             <Grid container spacing={2}>
+              <Grid item xs={12} sm={12}>
+                <TextField
+                  name='description'
+                  variant='outlined'
+                  required
+                  fullWidth
+                  id='description'
+                  label='Descripción'
+                  autoFocus
+                  placeholder="Describe quien eres y tus estudios para que la gente te conozca"
+                  multiline
+                  onChange={formik.handleChange}
+                  error={formik.errors.description}
+                />
+              </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   name='phoneNumber'
@@ -93,7 +104,7 @@ const MyCuenta = () => {
                   error={formik.errors.phoneNumber}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={12}>
                 <TextField
                   variant='outlined'
                   required
@@ -119,6 +130,19 @@ const MyCuenta = () => {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
+                <TextField
+                  variant='outlined'
+                  required
+                  fullWidth
+                  id='hourPrice'
+                  label='Pago deseado por hora (pesos)'
+                  name='hourPrice'
+                  value={formik.values.hourPrice}
+                  onChange={formik.handleChange}
+                  error={formik.errors.hourPrice}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
                     disableToolbar
@@ -127,7 +151,7 @@ const MyCuenta = () => {
                     margin='normal'
                     name='birthday'
                     id='date-picker-inline'
-                    label='Date picker inline'
+                    label='Fecha de nacimiento'
                     value={formik.values.birthday}
                     onChange={handleDateChange}
                     KeyboardButtonProps={{
@@ -193,21 +217,25 @@ export default MyCuenta
 
 function initialValues() {
   return {
+    description:'',
     birthday: new Date(),
     phoneNumber: '',
     level: '',
     school: '',
     gender: 'femenino',
+    hourPrice:20,
   }
 }
 
 function validationSchema() {
   return {
+    description: Yup.string().required(true),
     birthday: Yup.string().required(true),
     phoneNumber: Yup.string().required(true),
     level: Yup.string().required(true),
     school: Yup.string().required(true),
     gender: Yup.string().required(true),
+    hourPrice: Yup.number().required(true),
   }
 }
 
