@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import CardTopic from '../../components/card/Card'
 import { useRouter } from 'next/router'
 import { listThemeDetails } from '../../redux/actions/themeActions'
+import CardProfile from '../../components/card/CardProfile'
 
 const Tema = () => {
   const dispatch = useDispatch()
@@ -29,7 +30,6 @@ const Tema = () => {
   useEffect(() => {
     router.query.id && dispatch(listThemeDetails(router.query.id))
   }, [dispatch, router.query.id])
-  
 
   const handleClick = () => {
     console.info('You clicked the Chip.')
@@ -70,9 +70,13 @@ const Tema = () => {
           </Grid>
           <Grid item lg={7}>
             <h3>Descripción</h3>
-            <p>
-              {theme.description}
-            </p>
+            <p>{theme.description}</p>
+            <h3>Subtemas</h3>
+            <ul>
+              {theme?.subthemes?.map(subtheme => (
+                <li>{subtheme}</li>
+              ))}
+            </ul>
           </Grid>
         </Grid>
         <Grid container spacing={4}>
@@ -107,16 +111,16 @@ const Tema = () => {
         <h3>Asesores disponibles para este tema</h3>
         <Grid container spacing={3}>
           <Grid item lg={3}>
-            {/* <CardTopic /> */}
+            <CardProfile />
           </Grid>
           <Grid item lg={3}>
-            {/* <CardTopic /> */}
+            <CardProfile />
           </Grid>
           <Grid item lg={3}>
-            {/* <CardTopic /> */}
+            <CardProfile />
           </Grid>
           <Grid item lg={3}>
-            {/* <CardTopic /> */}
+            <CardProfile />
           </Grid>
         </Grid>
         <Grid container justify='center'>

@@ -16,6 +16,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormControl from '@material-ui/core/FormControl'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import FormLabel from '@material-ui/core/FormLabel'
+import LinearProgress from '@material-ui/core/LinearProgress'
+import MuiAlert from '@material-ui/lab/Alert'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
@@ -60,7 +62,7 @@ const nuevaCuenta = () => {
 
   useEffect(() => {
     if (userInfo) {
-      router.push('/perfil')
+      router.push('/catalogo')
     }
   }, [userInfo])
 
@@ -168,6 +170,8 @@ const nuevaCuenta = () => {
             </Grid>
             <Grid item xs={12}></Grid>
           </Grid>
+          {loading && <LinearProgress />}
+          {error && <Alert severity='error'>{error}</Alert>}
           <Button
             type='submit'
             fullWidth
@@ -209,4 +213,8 @@ function validationSchema() {
     email: Yup.string().email(true).required(true),
     password: Yup.string().required(true),
   }
+}
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant='filled' {...props} />
 }

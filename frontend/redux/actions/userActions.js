@@ -25,8 +25,8 @@ export const login = formData => async dispatch => {
 
     localStorage.setItem('userInfo', JSON.stringify(data))
   } catch (error) {
-    console.log(error.response);
-    console.log(error.message);
+    console.log(error.response)
+    console.log(error.message)
     dispatch({
       type: types.USER_LOGIN_FAIL,
       payload:
@@ -69,8 +69,8 @@ export const register = formData => async dispatch => {
     dispatch({
       type: types.USER_REGISTER_FAIL,
       payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
+        error.response && error.response.data.error
+          ? error.response.data.error
           : error.message,
     })
   }
