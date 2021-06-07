@@ -50,4 +50,25 @@ exports.updateDetails = asyncHandler(async (req, res, next) => {
   })
 })
 
+//? @desc      Get single tutor
+//? @route     GET /api/v1/tutors/:id
+//? @access    Public
+exports.getTutor = asyncHandler(async (req, res, next) => {
+  const tutor = await Tutor.findById(req.params.id).populate({
+    path: 'user',
+    select: 'name lastName email',
+  })
+  
+  if (!tutor) {
+    return next(
+      new ErrorResponse(`No tutor with the id of ${req.params.id}`),
+      404
+      )
+    }
+    
+  res.status(200).json({
+    success: true,
+    data: tutor,
+  })
+})
 //TODO: Delete account

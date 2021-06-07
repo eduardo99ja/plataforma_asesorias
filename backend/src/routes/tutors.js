@@ -4,6 +4,7 @@ const {
   getTutors,
   getMe,
   updateDetails,
+  getTutor
 } = require('../controllers/tutors')
 const Tutor = require('../models/Tutor')
 const advancedResults = require('../middleware/advancedResults')
@@ -20,5 +21,6 @@ router
   .post(createTutor)
 router.get('/me', protect, getMe)
 router.put('/updatedetails', protect, updateDetails)
+router.route('/:id').get(getTutor)
 
 module.exports = router

@@ -2,7 +2,7 @@ import React from 'react'
 import Rating from '@material-ui/lab/Rating'
 import Link from 'next/link'
 
-const CardProfile = () => {
+const CardProfile = ({ tutor }) => {
   return (
     <div class='cardProfile'>
       <Link href='/asesores/123456'>
@@ -11,15 +11,16 @@ const CardProfile = () => {
           alt='John'
         />
       </Link>
-      <Link href='/asesores/123456'>
-        <h2>Eduardo Apodaca</h2>
+      <Link href='/asesores/[id]' as={`/asesores/${tutor._id}`}>
+        <h2>
+          {tutor.user.name} {tutor.user.lastName}
+        </h2>
       </Link>
-      <p class='title'>Instituto Tecnologico de Toluca</p>
+      <p class='title'>{tutor.school}</p>
       <Rating name='size-large' defaultValue={2} size='large' readOnly />
-
-      <p>
-        <button className='btn-profile'>Seleccionar</button>
-      </p>
+      <button className='btn-profile'>Seleccionar</button>
+      
+      
     </div>
   )
 }

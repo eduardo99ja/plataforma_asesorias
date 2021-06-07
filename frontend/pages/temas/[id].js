@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import CardTopic from '../../components/card/Card'
 import { useRouter } from 'next/router'
 import { listThemeDetails } from '../../redux/actions/themeActions'
+import { listTutors } from '../../redux/actions/tutorActions'
 import CardProfile from '../../components/card/CardProfile'
 
 const Tema = () => {
@@ -27,10 +28,16 @@ const Tema = () => {
   const themeDetails = useSelector(state => state.themeDetails)
   const { loading, error, theme } = themeDetails
 
+  const tutorList = useSelector(state => state.tutorList)
+  const { tutors } = tutorList
+
   useEffect(() => {
     router.query.id && dispatch(listThemeDetails(router.query.id))
   }, [dispatch, router.query.id])
 
+  useEffect(() => {
+    dispatch(listTutors())
+  }, [dispatch])
   const handleClick = () => {
     console.info('You clicked the Chip.')
   }
@@ -110,18 +117,13 @@ const Tema = () => {
         </Grid>
         <h3>Asesores disponibles para este tema</h3>
         <Grid container spacing={3}>
-          <Grid item lg={3}>
-            <CardProfile />
-          </Grid>
-          <Grid item lg={3}>
-            <CardProfile />
-          </Grid>
-          <Grid item lg={3}>
-            <CardProfile />
-          </Grid>
-          <Grid item lg={3}>
-            <CardProfile />
-          </Grid>
+          {tutors.map(tutor => {
+            return (
+              <Grid key={tutor._id} item lg={3}>
+                <CardProfile tutor={tutor}/>
+              </Grid>
+            )
+          })}
         </Grid>
         <Grid container justify='center'>
           <Link href='/asesoria'>
