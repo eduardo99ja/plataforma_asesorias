@@ -43,7 +43,7 @@ export const listTutors = () => async dispatch => {
     let url = `api/v1/tutors`
 
     const { data } = await clienteAxios.get(url)
-    console.log(data)
+    
     dispatch({
       type: types.TUTOR_LIST_SUCCESS,
       payload: data.data,

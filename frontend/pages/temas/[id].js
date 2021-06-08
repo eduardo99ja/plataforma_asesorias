@@ -11,6 +11,7 @@ import {
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
+  KeyboardTimePicker,
 } from '@material-ui/pickers'
 import DateFnsUtils from '@date-io/date-fns'
 import Link from 'next/link'
@@ -20,6 +21,7 @@ import { useRouter } from 'next/router'
 import { listThemeDetails } from '../../redux/actions/themeActions'
 import { listTutors } from '../../redux/actions/tutorActions'
 import CardProfile from '../../components/card/CardProfile'
+import { createOrder } from '../../redux/actions/orderActions'
 
 const Tema = () => {
   const dispatch = useDispatch()
@@ -42,14 +44,42 @@ const Tema = () => {
     console.info('You clicked the Chip.')
   }
 
-  //date picker
+  const [details, setDetails] = useState('')
 
-  const [selectedDate, setSelectedDate] = useState(
-    new Date('2014-08-18T21:11:54')
-  )
+  const [tutorSelected, setTutorSelected] = useState({})
+
+  //date picker
+  const [selectedDate, setSelectedDate] = useState(new Date())
 
   const handleDateChange = date => {
     setSelectedDate(date)
+  }
+  //time picker
+  const [selectedTime, setSelectedTime] = useState()
+
+  const handleTimeChange = time => {
+    setSelectedTime(time)
+  }
+
+  //crear asesoria
+  const placeClassHandler = () => {
+    const order = {
+      tutor:tutorSelected._id,
+      classItems: [
+        {
+          name: theme.title,
+          qty: 1,
+          price: tutorSelected.hourPrice,
+          theme: theme._id,
+        },
+      ],
+      paymentMethod: 'Paypal',
+      itemsPrice: tutorSelected.hourPrice,
+      taxPrice: 20,
+      totalPrice: tutorSelected.hourPrice + 20,
+    }
+    
+    dispatch(createOrder(order))
   }
   return (
     <Layout>
@@ -86,9 +116,9 @@ const Tema = () => {
             </ul>
           </Grid>
         </Grid>
-        <Grid container spacing={4}>
-          <Grid item lg={5}>
-            <h4>Agendar asesoría para el día</h4>
+        <h4>Agendar asesoría</h4>
+        <Grid container spacing={4} justify='center'>
+          <Grid item lg={6} container justify='space-between'>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
                 margin='normal'
@@ -101,15 +131,28 @@ const Tema = () => {
                   'aria-label': 'change date',
                 }}
               />
+              <KeyboardTimePicker
+                margin='normal'
+                id='time-picker'
+                label='Seleccionar hora'
+                value={selectedTime}
+                onChange={handleTimeChange}
+                KeyboardButtonProps={{
+                  'aria-label': 'change time',
+                }}
+              />
             </MuiPickersUtilsProvider>
           </Grid>
-          <Grid item lg={7}>
+        </Grid>
+        <Grid container spacing={4} justify='center' className='mb-3'>
+          <Grid item lg={6} sm={12} xs={12}>
             <TextField
               id='outlined-multiline-static'
               label='Detalles adicionales'
               multiline
               rows={5}
-              defaultValue='Agregar detalles para la asesoria'
+              value={details}
+              onChange={e => setDetails(e.target.value)}
               variant='outlined'
               className='tema__agenda-detalles'
             />
@@ -120,15 +163,19 @@ const Tema = () => {
           {tutors.map(tutor => {
             return (
               <Grid key={tutor._id} item lg={3}>
-                <CardProfile tutor={tutor}/>
+                <CardProfile
+                  tutor={tutor}
+                  setTutor={setTutorSelected}
+                  tutorSelected={tutorSelected}
+                />
               </Grid>
             )
           })}
         </Grid>
         <Grid container justify='center'>
-          <Link href='/asesoria'>
+          <Button onClick={placeClassHandler}>
             <a className='btn-agendar'>Agendar asesoria</a>
-          </Link>
+          </Button>
         </Grid>
       </Container>
     </Layout>

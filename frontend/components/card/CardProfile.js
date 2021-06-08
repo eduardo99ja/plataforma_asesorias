@@ -2,9 +2,9 @@ import React from 'react'
 import Rating from '@material-ui/lab/Rating'
 import Link from 'next/link'
 
-const CardProfile = ({ tutor }) => {
+const CardProfile = ({ tutor,setTutor,tutorSelected }) => {
   return (
-    <div class='cardProfile'>
+    <div class={ tutorSelected._id == tutor._id ? 'cardProfile  cardProfile-selected' : 'cardProfile'}>
       <Link href='/asesores/[id]' as={`/asesores/${tutor._id}`}>
         <img
           src='https://res.cloudinary.com/du17vjpcn/image/upload/v1621985542/public_asesorias/undraw_profile_pic_ic5t_xhiicp.png'
@@ -18,7 +18,8 @@ const CardProfile = ({ tutor }) => {
       </Link>
       <p class='title'>{tutor.school}</p>
       <Rating name='size-small' defaultValue={2} size='small' readOnly />
-      <button className='btn-profile'>Seleccionar</button>
+      <p class='title'>${tutor.hourPrice}</p>
+      <button className='btn-profile' onClick={() => setTutor(tutor)}>Seleccionar</button>
       
       
     </div>

@@ -1,5 +1,7 @@
 .cardProfile {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  
+  padding: 10px;
   max-width: 300px;
   margin: auto;
   text-align: center;
@@ -14,6 +16,9 @@
   .title {
     color: grey;
     font-size: 16px;
+  }
+  &-selected {
+    box-shadow: 0 5px 10px 0 rgb(0, 30, 253);
   }
 }
 .btn-profile {

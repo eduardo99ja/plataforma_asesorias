@@ -10,6 +10,7 @@ const tutors = require('./routes/tutors')
 const pupils = require('./routes/pupils')
 const subjects = require('./routes/subjects')
 const themes = require('./routes/themes')
+const classes = require('./routes/classes')
 
 class Server {
   constructor() {
@@ -57,6 +58,7 @@ class Server {
     this.app.use('/api/v1/auth', auth)
     this.app.use('/api/v1/tutors', tutors)
     this.app.use('/api/v1/pupils', pupils)
+    this.app.use('/api/v1/classes', classes)
 
     this.app.use(errorHandler)
   }

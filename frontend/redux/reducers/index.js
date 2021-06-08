@@ -9,6 +9,7 @@ import {
   tutorDetailsReducer,
   tutorListReducer,
 } from './tutorReducer'
+import { orderCreateReducer } from './orderReducer'
 
 export default combineReducers({
   topicList: topicListReducer,
@@ -21,4 +22,5 @@ export default combineReducers({
   tutorRegister: tutorRegisterReducer,
   tutorList: tutorListReducer,
   tutorDetails: tutorDetailsReducer,
+  orderCreate: orderCreateReducer,
 })
