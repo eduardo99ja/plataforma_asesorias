@@ -15,6 +15,8 @@ exports.addClassItems = asyncHandler(async (req, res, next) => {
     itemsPrice,
     taxPrice,
     totalPrice,
+    timeClass,
+    dateClass,
   } = req.body
   if (classItems && classItems.length === 0) {
     return next(new ErrorResponse(`No class items`, 400))
@@ -28,6 +30,8 @@ exports.addClassItems = asyncHandler(async (req, res, next) => {
       itemsPrice,
       taxPrice,
       totalPrice,
+      timeClass,
+      dateClass,
     })
 
     const createdClass = await order.save()
@@ -42,13 +46,9 @@ exports.addClassItems = asyncHandler(async (req, res, next) => {
 // @route   GET /api/classes/:id
 // @access  Private
 exports.getClassById = asyncHandler(async (req, res) => {
-  const order = await Class.findById(req.params.id).populate(
-    'pupil',
-    'name email'
-  ).populate(
-    'tutor',
-    'name email'
-  )
+  const order = await Class.findById(req.params.id)
+    .populate('pupil', 'name email')
+    .populate('tutor', 'name email')
 
   if (order) {
     res.status(200).json({

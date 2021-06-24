@@ -14,24 +14,21 @@ const services = [
     title: 'Clases de regularización',
     description:
       '¿Se te dificulta un tema o materia escolar?, no hay problema nuestros asesores te ayudaran con cualquiera de nuestros 500+ temas disponibles',
-    img:
-      'https://res.cloudinary.com/du17vjpcn/image/upload/v1619458662/public_asesorias/classes_hqqpsc.png',
+    img: 'https://res.cloudinary.com/du17vjpcn/image/upload/v1619458662/public_asesorias/classes_hqqpsc.png',
   },
   {
     id: 2,
     title: 'Asesorias pares',
     description:
       'Encuentra al asesor con el que te sientas más comodo, el te explicara el tema que necesitas y resolvera todas tus dudas.',
-    img:
-      'https://res.cloudinary.com/du17vjpcn/image/upload/v1619458662/public_asesorias/pairs_cfmabv.png',
+    img: 'https://res.cloudinary.com/du17vjpcn/image/upload/v1619458662/public_asesorias/pairs_cfmabv.png',
   },
   {
     id: 3,
     title: 'Preparación para examenes',
     description:
       '¿Tienes un examen importante por realizar? , nosotros te ayudamos a estudiar y reforzar todos los temas que lo comprenden.',
-    img:
-      'https://res.cloudinary.com/du17vjpcn/image/upload/v1619458662/public_asesorias/exams_h1xius.png',
+    img: 'https://res.cloudinary.com/du17vjpcn/image/upload/v1619458662/public_asesorias/exams_h1xius.png',
   },
 ]
 export default function Home() {
@@ -99,14 +96,9 @@ export default function Home() {
                 />
               </figure>
               <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi
-                quisquam incidunt non nemo. Sunt natus repudiandae assumenda
-                voluptate, veniam perspiciatis voluptatum cum doloremque aliquam
-                officia cupiditate. Sed esse dolor mollitia. Voluptatem optio
-                odio reiciendis voluptatum impedit molestias. Eum atque dolorum
-                totam consequatur quisquam expedita autem soluta! Laborum
-                deleniti molestiae error debitis officiis? Voluptate ratione
-                numquam a saepe molestias rem fuga!
+                Elige un tema de nuestro gran catalogo, selecciona al asesor que
+                mas te convenga, solicita tu asesoria y tu asesor con gusto te
+                explicara el tema que seleccionaste.
               </p>
               <Link href='catalogo'>
                 <a href='#'>Empieza a buscar</a>
@@ -152,7 +144,6 @@ export default function Home() {
       <Banner />
       <HowItWorks />
       <Services />
-      <Footer title='TeachMe' description='Asesorias pares estudiantes' />
     </Layout>
   )
 }

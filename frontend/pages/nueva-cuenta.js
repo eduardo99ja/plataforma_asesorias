@@ -61,8 +61,11 @@ const nuevaCuenta = () => {
   const { loading, error, userInfo } = userRegister
 
   useEffect(() => {
-    if (userInfo) {
-      router.push('/catalogo')
+    if (userInfo?.role === "asesorado") {
+      router.push('/estudiantes/mi-cuenta')
+    }
+    if (userInfo?.role === "asesor") {
+      router.push('/asesores/mi-cuenta')
     }
   }, [userInfo])
 

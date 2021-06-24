@@ -1,9 +1,9 @@
-import React from 'react'
-import Layout from '../components/layout/Layout'
-import Link from 'next/link'
+import React, { useState } from 'react'
+import Layout from '../../components/layout/Layout'
 import { Container, Paper, Grid, Button } from '@material-ui/core'
 
 const Asesorias = () => {
+  const [aceptado, setAceptado] = useState(false)
   return (
     <Layout>
       <Container maxWidth='md'>
@@ -19,21 +19,35 @@ const Asesorias = () => {
             </Grid>
             <Grid item xl={6} lg={6} md={6}>
               <div className='asesorias__detalles'>
-                <div>Detalles</div>
-                <div>Fecha:30/06/2021 Hora:13:00</div>
-                <div>Asesor: Carlos Hernandez Rivera</div>
+                <div>
+                  <strong>Fecha: 30/06/2021 Hora:13:00</strong>
+                </div>
+                <div>
+                  Asesorado: <strong> Eduardo Jimenez Apodaca</strong>
+                </div>
+                <div>
+                  {' '}
+                  Tema:
+                  <strong> Metodos de integracion e integral indefinida</strong>
+                </div>
                 <div>Detalles adicionales</div>
                 <p>Enfoque especial en integracion por partes</p>
               </div>
             </Grid>
             <Grid item container xl={2} lg={2} md={2}>
               <Grid item xl={12} lg={12} md={12} className='asesorias__status'>
-                <div><strong>Aceptada</strong></div>
-                <Link href='/asesoria/[id]' as={`/asesoria/60a187b3d802501b642fe64c`}>
-                  <Button variant='contained' color='primary'>
-                   Ir a pagar
+                {!aceptado && (
+                  <Button
+                    variant='contained'
+                    color='primary'
+                    onClick={() => setAceptado(true)}
+                  >
+                    Aceptar
                   </Button>
-                </Link>
+                )}
+                 {aceptado && (
+                 <div><strong>Aceptada</strong></div>
+                )}
               </Grid>
             </Grid>
           </Grid>
@@ -50,9 +64,17 @@ const Asesorias = () => {
             </Grid>
             <Grid item xl={6} lg={6} md={6}>
               <div className='asesorias__detalles'>
-                <div>Detalles</div>
-                <div>Fecha: 03/05/2021 Hora:13:00</div>
-                <div>Asesor: Eduardo Apodaca</div>
+                <div>
+                  <strong>Fecha: 03/05/2021 Hora:16:00</strong>
+                </div>
+                <div>
+                  Asesorado: <strong> Eduardo Jimenez Apodaca</strong>
+                </div>
+                <div>
+                  {' '}
+                  Tema:
+                  <strong> Metodos de integracion e integral indefinida</strong>
+                </div>
                 <div>Detalles adicionales</div>
                 <p>
                   Lorem, ipsum dolor sit amet consectetur adipisicing elit.
@@ -64,7 +86,9 @@ const Asesorias = () => {
             </Grid>
             <Grid item container xl={2} lg={2} md={2}>
               <Grid item xl={12} lg={12} md={12} className='asesorias__status'>
-                <div>Terminada</div>
+                <div>
+                  <strong>Terminada</strong>
+                </div>
               </Grid>
             </Grid>
           </Grid>
@@ -80,9 +104,17 @@ const Asesorias = () => {
             </Grid>
             <Grid item xl={6} lg={6} md={6}>
               <div className='asesorias__detalles'>
-                <div>Detalles</div>
-                <div>Fecha: 03/05/2021 Hora:16:00</div>
-                <div>Asesor: Eduardo Apodaca</div>
+                <div>
+                  <strong>Fecha: 03/05/2021 Hora:16:00</strong>
+                </div>
+                <div>
+                  Asesorado: <strong> Eduardo Jimenez Apodaca</strong>
+                </div>
+                <div>
+                  {' '}
+                  Tema:
+                  <strong> Metodos de integracion e integral indefinida</strong>
+                </div>
                 <div>Detalles adicionales</div>
                 <p>
                   Lorem, ipsum dolor sit amet consectetur adipisicing elit.
@@ -94,7 +126,9 @@ const Asesorias = () => {
             </Grid>
             <Grid item container xl={2} lg={2} md={2}>
               <Grid item xl={12} lg={12} md={12} className='asesorias__status'>
-                <div>Terminada</div>
+                <div>
+                  <strong>Terminada</strong>
+                </div>
               </Grid>
             </Grid>
           </Grid>
@@ -102,6 +136,14 @@ const Asesorias = () => {
       </Container>
     </Layout>
   )
+  // return (
+  //   <Layout>
+  //     <Container maxWidth='md'>
+  //       <h2>Mis asesorias</h2>
+  //       <h3>Aun no cuentas con ninguna solicitud de asesorias</h3>
+  //     </Container>
+  //   </Layout>
+  // )
 }
 
 export default Asesorias

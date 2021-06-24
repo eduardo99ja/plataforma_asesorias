@@ -12,6 +12,9 @@ const classSchema = mongoose.Schema(
       required: true,
       ref: 'User',
     },
+    timeClass: {
+      type: Date,
+    },
     classItems: [
       {
         name: { type: String, required: true },
@@ -50,6 +53,12 @@ const classSchema = mongoose.Schema(
       default: false,
     },
     paidAt: {
+      type: Date,
+    },
+    acceptedAt: {
+      type: Date,
+    },
+    finishedAt: {
       type: Date,
     },
     isAccepted: {

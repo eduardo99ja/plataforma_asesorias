@@ -112,11 +112,18 @@ export default function PrimarySearchAppBar() {
     setAnchorEl(null)
     handleMobileMenuClose()
   }
+  const hendleAsesorias = () => {
+    setAnchorEl(null)
+    handleMobileMenuClose()
+    router.push("/asesorias")
+  }
 
   const handleLogout = () => {
+    router.push('/')
     setAnchorEl(null)
     handleMobileMenuClose()
     dispatch(logout())
+   
   }
 
   const handleMobileMenuOpen = event => {
@@ -135,7 +142,7 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={hendleAsesorias}>Mis asesorias</MenuItem>
       <MenuItem onClick={handleLogout}>Cerrar sesión</MenuItem>
     </Menu>
   )

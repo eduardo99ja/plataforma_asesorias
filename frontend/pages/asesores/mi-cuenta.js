@@ -14,6 +14,12 @@ import {
   Button,
   Link,
 } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+import Avatar from '@material-ui/core/Avatar'
+import Chip from '@material-ui/core/Chip'
+import FaceIcon from '@material-ui/icons/Face'
+import DoneIcon from '@material-ui/icons/Done'
+import Paper from '@material-ui/core/Paper'
 import DateFnsUtils from '@date-io/date-fns'
 import {
   MuiPickersUtilsProvider,
@@ -29,7 +35,19 @@ import jwt_decode from 'jwt-decode'
 import { useDispatch, useSelector } from 'react-redux'
 import { register } from '../../redux/actions/tutorActions'
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    '& > *': {
+      margin: theme.spacing(0.5),
+    },
+  },
+}))
+
 const MyCuenta = () => {
+  const classes = useStyles()
   const dispatch = useDispatch()
   const router = useRouter()
   const tutorRegister = useSelector(state => state.tutorRegister)
@@ -41,13 +59,34 @@ const MyCuenta = () => {
 
   useEffect(() => {
     if (tutorInfo) {
-      router.push('/catalogo')
+      router.push('/asesores/asesorias')
     }
   }, [tutorInfo])
   const [selectedDate, setSelectedDate] = React.useState(
     new Date('2014-08-18T21:11:54')
   )
-
+  const [chipData, setChipData] = React.useState([
+    { key: 0, label: 'Matematicas' },
+    { key: 1, label: 'Fisica' },
+    { key: 2, label: 'Ingles' },
+    { key: 3, label: 'Historia' },
+    { key: 4, label: 'Quimica' },
+  ])
+  const [chipMaterias, setChipMaterias] = React.useState([
+    
+  ])
+  const handleDelete = chipToDelete => () => {
+    setChipMaterias(chips =>
+      chips.filter(chip => chip.key !== chipToDelete.key)
+    )
+  }
+  const handleClick = chipToAdd => () => {
+   setChipMaterias( [
+     ...chipMaterias,
+    { key: chipToAdd.key, label:chipToAdd.label },
+    
+  ])
+  }
   const handleDateChange = date => {
     setSelectedDate(date)
   }
@@ -65,6 +104,7 @@ const MyCuenta = () => {
       dispatch(register(formData))
     },
   })
+
   return (
     <Layout>
       <Container component='main' maxWidth='md'>
@@ -85,7 +125,7 @@ const MyCuenta = () => {
                   id='description'
                   label='Descripción'
                   autoFocus
-                  placeholder="Describe quien eres y tus estudios para que la gente te conozca"
+                  placeholder='Describe quien eres y tus estudios para que la gente te conozca'
                   multiline
                   onChange={formik.handleChange}
                   error={formik.errors.description}
@@ -188,6 +228,47 @@ const MyCuenta = () => {
               </Grid>
               <Grid item xs={12}></Grid>
             </Grid>
+            <h2>Materias disponibles</h2>
+            <div className={classes.root}>
+              <Paper component='ul' className={classes.root}>
+                {chipData.map(data => {
+                  let icon
+
+                  return (
+                    <li key={data.key}>
+                      <Chip
+                        avatar={<Avatar>M</Avatar>}
+                        label={data.label}
+                        clickable
+                        color='primary'
+                        onDelete={handleClick(data)}
+                        deleteIcon={<DoneIcon />}
+                      />
+                    </li>
+                  )
+                })}
+              </Paper>
+            </div>
+            <h2>Materias Seleccionadas para impartir</h2>
+            <div className={classes.root}>
+              <Paper component='ul' className={classes.root}>
+                {chipMaterias.map(data => {
+                  let icon
+
+                  return (
+                    <li key={data.key}>
+                      <Chip
+                        icon={icon}
+                        label={data.label}
+                        color='secondary'
+                        onDelete={handleDelete(data)}
+                        className={classes.chip}
+                      />
+                    </li>
+                  )
+                })}
+              </Paper>
+            </div>
             {/* {loading && <LinearProgress />}
           {error && <Alert severity='error'>{error}</Alert>} */}
             <Button
@@ -217,13 +298,13 @@ export default MyCuenta
 
 function initialValues() {
   return {
-    description:'',
+    description: '',
     birthday: new Date(),
     phoneNumber: '',
     level: '',
     school: '',
     gender: 'femenino',
-    hourPrice:20,
+    hourPrice: 20,
   }
 }
 

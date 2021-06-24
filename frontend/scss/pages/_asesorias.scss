@@ -13,3 +13,30 @@
   margin-top: 2rem !important;
   margin-bottom: 2rem !important;
 }
+.asesoria-aceptada {
+  background-color: green;
+  color: white;
+  width: 100%;
+  max-height: 5rem;
+  padding: 1.5rem;
+}
+.asesoria-no-pagada{
+  background-color: rgb(255, 0, 0);
+  color: white;
+  width: 100%;
+  padding: 1.5rem;
+  max-height: 5rem;
+}
+.panel-pago{
+  padding: 2rem;
+  background-color: black;
+  color: white;
+  
+}
+.panel-link{
+  padding: 2rem;
+  background-color: aquamarine;
+ >a{
+   font-size: 28px;
+ }
+}

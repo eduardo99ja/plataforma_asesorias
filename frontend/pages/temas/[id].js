@@ -60,17 +60,30 @@ const Tema = () => {
   const handleTimeChange = time => {
     setSelectedTime(time)
   }
+  //Reducer de la orden
+  const orderCreate = useSelector(state => state.orderCreate)
+  const { order, success, error: errorOrder } = orderCreate
+  //Camvbiar de pagina al crear orden
+  useEffect(() => {
+    if (success) {
+      router.push(`/asesoria/${order._id}`)
+    }
+    // eslint-disable-next-line
+  }, [router, success])
 
   //crear asesoria
   const placeClassHandler = () => {
     const order = {
-      tutor:tutorSelected._id,
+      tutor: tutorSelected._id,
+      dateClass: selectedDate,
+      timeClass: selectedTime,
       classItems: [
         {
           name: theme.title,
           qty: 1,
           price: tutorSelected.hourPrice,
           theme: theme._id,
+          details: details,
         },
       ],
       paymentMethod: 'Paypal',
@@ -79,6 +92,7 @@ const Tema = () => {
       totalPrice: tutorSelected.hourPrice + 20,
     }
     
+
     dispatch(createOrder(order))
   }
   return (
